@@ -1,6 +1,6 @@
 # soardscn
 
-Local component library and shadcn registry source for `@ui/*`.
+Local component library and shadcn registry source for `@ui/*` and `@enhanced/*`.
 
 ## Registry build
 
@@ -22,7 +22,8 @@ In the consumer app `components.json`:
 ```json
 {
   "registries": {
-    "@ui": "https://dys-org.github.io/soardscn-ui/r/ui/{name}.json"
+    "@ui": "https://dys-org.github.io/soardscn-ui/r/ui/{name}.json",
+    "@enhanced": "https://dys-org.github.io/soardscn-ui/r/ui/{name}.json"
   }
 }
 ```
@@ -31,6 +32,7 @@ Install from registry:
 
 ```bash
 pnpm dlx shadcn@latest add @ui/button
+pnpm dlx shadcn@latest add @enhanced/multi-select
 ```
 
 ## Migration status
