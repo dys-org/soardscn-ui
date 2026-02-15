@@ -80,8 +80,8 @@ Consumers should add to their `components.json`:
 ```json
 {
   "registries": {
-    "@ui": "https://<pages-url>/r/ui/{name}.json",
-    "@lib": "https://<pages-url>/r/lib/{name}.json"
+    "@ui": "https://dys-org.github.io/soardscn-ui/r/ui/{name}.json",
+    "@lib": "https://dys-org.github.io/soardscn-ui/r/lib/{name}.json"
   }
 }
 ```

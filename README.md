@@ -22,8 +22,8 @@ In the consumer app `components.json`:
 ```json
 {
   "registries": {
-    "@ui": "https://<pages-url>/r/ui/{name}.json",
-    "@lib": "https://<pages-url>/r/lib/{name}.json"
+    "@ui": "https://dys-org.github.io/soardscn-ui/r/ui/{name}.json",
+    "@lib": "https://dys-org.github.io/soardscn-ui/r/lib/{name}.json"
   }
 }
 ```
@@ -38,4 +38,4 @@ pnpm dlx shadcn@latest add @ui/button
 
 The registry metadata assumes distributable files live under `src/registry/*`.
 If this repo still has UI primitives in `src/components/ui/*`, follow
-`plan-shadcnCodeRegistry.prompt.md` first.
+`docs/plans/shadcn-registry-migration.md` first.

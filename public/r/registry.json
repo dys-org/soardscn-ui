@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "soardscn",
-  "homepage": "https://<pages-url>",
+  "homepage": "https://dys-org.github.io/soardscn-ui",
   "items": [
     {
       "name": "utils",
