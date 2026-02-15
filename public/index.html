@@ -7,29 +7,38 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #f8fafc;
-        --text: #0f172a;
+        --bg: #fafafa;
+        --text: #18181b;
+        --muted: #71717a;
         --card-bg: #ffffff;
-        --card-border: #e2e8f0;
-        --link: #0f766e;
-        --code-bg: #0f172a;
-        --code-text: #e2e8f0;
+        --card-border: #e4e4e7;
+        --link: #3f3f46;
+        --code-bg: #18181b;
+        --code-text: #f4f4f5;
+        --inline-code: #3f3f46;
+        --card-shadow: inset 0 1px 0 rgba(24, 24, 27, 0.03);
+        --pre-border: #27272a;
+        --radius: 10px;
       }
       @media (prefers-color-scheme: dark) {
         :root {
           color-scheme: dark;
-          --bg: #020617;
-          --text: #e2e8f0;
-          --card-bg: #0f172a;
-          --card-border: #1e293b;
-          --link: #5eead4;
-          --code-bg: #020617;
-          --code-text: #e2e8f0;
+          --bg: #09090b;
+          --text: #fafafa;
+          --muted: #a1a1aa;
+          --card-bg: #111113;
+          --card-border: #27272a;
+          --link: #e4e4e7;
+          --code-bg: #0a0a0b;
+          --code-text: #e4e4e7;
+          --inline-code: #d4d4d8;
+          --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+          --pre-border: #1f1f23;
         }
       }
       body {
         margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        font-family: ui-sans-serif, system-ui, sans-serif;
         background: var(--bg);
         color: var(--text);
       }
@@ -39,33 +48,53 @@
         padding: 48px 20px;
       }
       h1 {
-        margin: 0 0 10px;
+        margin: 0;
         font-size: 2rem;
+        font-weight: 600;
       }
       p {
-        margin: 0 0 14px;
+        margin: 8px 0 0;
         line-height: 1.55;
+        color: var(--muted);
+      }
+      .meta {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.92rem;
       }
       .card {
         background: var(--card-bg);
         border: 1px solid var(--card-border);
-        border-radius: 12px;
-        padding: 16px;
-        margin: 18px 0;
+        border-radius: var(--radius);
+        padding: 18px;
+        margin: 16px 0;
+        box-shadow: var(--card-shadow);
       }
-      code, pre {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
+      .card h2 {
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      code,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      code {
+        color: var(--inline-code);
       }
       pre {
-        margin: 10px 0 0;
+        margin: 12px 0 0;
         overflow-x: auto;
         padding: 12px;
         background: var(--code-bg);
         color: var(--code-text);
         border-radius: 8px;
+        border: 1px solid var(--pre-border);
       }
       ul {
-        margin: 8px 0 0;
+        margin: 10px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
       }
       a {
         color: var(--link);
@@ -78,13 +107,14 @@
   </head>
   <body>
     <main>
-      <h1>soardscn-ui Registry</h1>
+      <h1>soardscn-ui registry</h1>
       <p>
         This GitHub Pages site serves a shadcn-compatible component registry.
       </p>
+      <div class="meta">Base UI • Mira • Remix Icons</div>
 
       <section class="card">
-        <strong>Registry endpoints</strong>
+        <h2>Registry endpoints</h2>
         <ul>
           <li><a href="/soardscn-ui/r/registry.json">/r/registry.json</a></li>
           <li><a href="/soardscn-ui/r/ui/button.json">/r/ui/button.json</a></li>
@@ -93,17 +123,19 @@
       </section>
 
       <section class="card">
-        <strong>Consumer <code>components.json</code></strong>
-        <pre>{
+        <h2>Consumer <code>components.json</code></h2>
+        <pre>
+{
   "registries": {
     "@ui": "https://dys-org.github.io/soardscn-ui/r/ui/{name}.json",
     "@lib": "https://dys-org.github.io/soardscn-ui/r/lib/{name}.json"
   }
-}</pre>
+}</pre
+        >
       </section>
 
       <section class="card">
-        <strong>Install example</strong>
+        <h2>Install example</h2>
         <pre>pnpm dlx shadcn@latest add @ui/button</pre>
       </section>
     </main>
