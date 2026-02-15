@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "card",
   "registryDependencies": [
-    "@lib/utils"
+    "utils"
   ],
   "files": [
     {

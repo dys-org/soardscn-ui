@@ -1,6 +1,6 @@
 # soardscn
 
-Local component library and shadcn registry source for `@ui/*` and `@lib/*`.
+Local component library and shadcn registry source for `@ui/*`.
 
 ## Registry build
 
@@ -22,8 +22,7 @@ In the consumer app `components.json`:
 ```json
 {
   "registries": {
-    "@ui": "https://dys-org.github.io/soardscn-ui/r/ui/{name}.json",
-    "@lib": "https://dys-org.github.io/soardscn-ui/r/lib/{name}.json"
+    "@ui": "https://dys-org.github.io/soardscn-ui/r/ui/{name}.json"
   }
 }
 ```

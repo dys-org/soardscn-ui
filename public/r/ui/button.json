@@ -6,7 +6,7 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "@lib/utils"
+    "utils"
   ],
   "files": [
     {

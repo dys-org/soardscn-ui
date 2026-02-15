@@ -16,6 +16,7 @@
     "components": "@/registry",
     "utils": "@/registry/lib/utils",
     "ui": "@/registry/ui",
+    "enhanced": "@/registry/enhanced",
     "lib": "@/registry/lib",
     "hooks": "@/hooks"
   },

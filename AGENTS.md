@@ -4,6 +4,7 @@
 - App source lives in `src/`.
 - Route files are in `src/routes/` (for example, `src/routes/index.tsx` and `src/routes/__root.tsx`).
 - Reusable registry UI primitives are in `src/registry/ui/`; registry helpers are in `src/registry/lib/`.
+- Enhanced registry components with additional logic (built from `ui` primitives) live in `src/registry/enhanced/`.
 - Feature-level app components are in `src/components/`.
 - Root `registry.json` is the source registry manifest used by `shadcn build`.
 - Generated registry output is under `public/r/` (including `public/r/registry.json`, `public/r/ui/*.json`, and `public/r/lib/*.json`).
@@ -27,6 +28,7 @@ Use `pnpm` (lockfile: `pnpm-lock.yaml`).
 - Formatting is managed by Prettier: single quotes, no semicolons, trailing commas.
 - Follow ESLint from `@tanstack/eslint-config`.
 - Use path alias imports via `@/` for `src/*` paths.
+- In enhanced components, prefer composing from `@/registry/ui/*` primitives rather than duplicating low-level behavior.
 - Components: PascalCase (`ComponentExample.tsx`); utilities/hooks: camelCase.
 - Keep route modules aligned with URL/file-based routing conventions in `src/routes/`.
 

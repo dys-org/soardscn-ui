@@ -17,7 +17,7 @@
     {
       "name": "label",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils"],
+      "registryDependencies": ["utils"],
       "files": [
         {
           "path": "src/registry/ui/label.tsx",
@@ -28,7 +28,7 @@
     {
       "name": "input",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils"],
+      "registryDependencies": ["utils"],
       "dependencies": ["@base-ui/react"],
       "files": [
         {
@@ -40,7 +40,7 @@
     {
       "name": "textarea",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils"],
+      "registryDependencies": ["utils"],
       "files": [
         {
           "path": "src/registry/ui/textarea.tsx",
@@ -51,7 +51,7 @@
     {
       "name": "card",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils"],
+      "registryDependencies": ["utils"],
       "files": [
         {
           "path": "src/registry/ui/card.tsx",
@@ -62,7 +62,7 @@
     {
       "name": "separator",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils"],
+      "registryDependencies": ["utils"],
       "dependencies": ["@base-ui/react"],
       "files": [
         {
@@ -74,7 +74,7 @@
     {
       "name": "button",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils"],
+      "registryDependencies": ["utils"],
       "dependencies": ["@base-ui/react", "class-variance-authority"],
       "files": [
         {
@@ -86,7 +86,7 @@
     {
       "name": "badge",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils"],
+      "registryDependencies": ["utils"],
       "dependencies": ["@base-ui/react", "class-variance-authority"],
       "files": [
         {
@@ -98,7 +98,7 @@
     {
       "name": "input-group",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils", "@ui/button", "@ui/input", "@ui/textarea"],
+      "registryDependencies": ["utils", "@ui/button", "@ui/input", "@ui/textarea"],
       "dependencies": ["class-variance-authority"],
       "files": [
         {
@@ -110,7 +110,7 @@
     {
       "name": "alert-dialog",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils", "@ui/button"],
+      "registryDependencies": ["utils", "@ui/button"],
       "dependencies": ["@base-ui/react"],
       "files": [
         {
@@ -122,7 +122,7 @@
     {
       "name": "dropdown-menu",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils"],
+      "registryDependencies": ["utils"],
       "dependencies": ["@base-ui/react", "@remixicon/react"],
       "files": [
         {
@@ -134,7 +134,7 @@
     {
       "name": "select",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils"],
+      "registryDependencies": ["utils"],
       "dependencies": ["@base-ui/react", "@remixicon/react"],
       "files": [
         {
@@ -146,7 +146,7 @@
     {
       "name": "combobox",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils", "@ui/button", "@ui/input-group"],
+      "registryDependencies": ["utils", "@ui/button", "@ui/input-group"],
       "dependencies": ["@base-ui/react", "@remixicon/react"],
       "files": [
         {
@@ -158,11 +158,23 @@
     {
       "name": "field",
       "type": "registry:ui",
-      "registryDependencies": ["@lib/utils", "@ui/label", "@ui/separator"],
+      "registryDependencies": ["utils", "@ui/label", "@ui/separator"],
       "dependencies": ["class-variance-authority"],
       "files": [
         {
           "path": "src/registry/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:ui",
+      "registryDependencies": ["utils", "@ui/combobox", "@ui/badge"],
+      "dependencies": ["class-variance-authority"],
+      "files": [
+        {
+          "path": "src/registry/enhanced/multi-select/multi-select.tsx",
           "type": "registry:ui"
         }
       ]

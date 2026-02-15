@@ -6,7 +6,7 @@
     "@remixicon/react"
   ],
   "registryDependencies": [
-    "@lib/utils"
+    "utils"
   ],
   "files": [
     {
