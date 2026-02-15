@@ -17,9 +17,9 @@ import {
   AlertDialogMedia,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+} from "@/registry/ui/alert-dialog"
+import { Badge } from "@/registry/ui/badge"
+import { Button } from "@/registry/ui/button"
 import {
   Card,
   CardAction,
@@ -28,7 +28,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/registry/ui/card"
 import {
   Combobox,
   ComboboxContent,
@@ -36,7 +36,7 @@ import {
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
-} from "@/components/ui/combobox"
+} from "@/registry/ui/combobox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -53,9 +53,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+} from "@/registry/ui/dropdown-menu"
+import { Field, FieldGroup, FieldLabel } from "@/registry/ui/field"
+import { Input } from "@/registry/ui/input"
 import {
   Select,
   SelectContent,
@@ -63,8 +63,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/registry/ui/select"
+import { Textarea } from "@/registry/ui/textarea"
 import { RiAddLine, RiBluetoothLine, RiMore2Line, RiFileLine, RiFolderLine, RiFolderOpenLine, RiCodeLine, RiMoreLine, RiSearchLine, RiSaveLine, RiDownloadLine, RiEyeLine, RiLayoutLine, RiPaletteLine, RiSunLine, RiMoonLine, RiComputerLine, RiUserLine, RiBankCardLine, RiSettingsLine, RiKeyboardLine, RiTranslate, RiNotificationLine, RiMailLine, RiShieldLine, RiQuestionLine, RiFileTextLine, RiLogoutBoxLine } from "@remixicon/react"
 
 export function ComponentExample() {

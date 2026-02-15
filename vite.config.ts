@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import { devtools } from '@tanstack/devtools-vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import viteReact from '@vitejs/plugin-react'
@@ -18,6 +18,14 @@ const config = defineConfig({
     tanstackStart(),
     viteReact(),
   ],
+  test: {
+    include: ['src/**/*.test.ts?(x)'],
+    browser: {
+      enabled: true,
+      provider: 'playwright',
+      instances: [{ browser: 'chromium' }],
+    },
+  },
 })
 
 export default config

@@ -13,10 +13,10 @@
   "iconLibrary": "remixicon",
   "rtl": false,
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils",
-    "ui": "@/components/ui",
-    "lib": "@/lib",
+    "components": "@/registry",
+    "utils": "@/registry/lib/utils",
+    "ui": "@/registry/ui",
+    "lib": "@/registry/lib",
     "hooks": "@/hooks"
   },
   "menuColor": "default",

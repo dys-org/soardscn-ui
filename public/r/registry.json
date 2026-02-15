@@ -1,0 +1,171 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "soardscn",
+  "homepage": "https://<pages-url>",
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "files": [
+        {
+          "path": "src/registry/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "dependencies": ["clsx", "tailwind-merge"]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils"],
+      "files": [
+        {
+          "path": "src/registry/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils"],
+      "dependencies": ["@base-ui/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils"],
+      "files": [
+        {
+          "path": "src/registry/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils"],
+      "files": [
+        {
+          "path": "src/registry/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils"],
+      "dependencies": ["@base-ui/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils"],
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "files": [
+        {
+          "path": "src/registry/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils"],
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "files": [
+        {
+          "path": "src/registry/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils", "@ui/button", "@ui/input", "@ui/textarea"],
+      "dependencies": ["class-variance-authority"],
+      "files": [
+        {
+          "path": "src/registry/ui/input-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils", "@ui/button"],
+      "dependencies": ["@base-ui/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils"],
+      "dependencies": ["@base-ui/react", "@remixicon/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils"],
+      "dependencies": ["@base-ui/react", "@remixicon/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils", "@ui/button", "@ui/input-group"],
+      "dependencies": ["@base-ui/react", "@remixicon/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/combobox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "registryDependencies": ["@lib/utils", "@ui/label", "@ui/separator"],
+      "dependencies": ["class-variance-authority"],
+      "files": [
+        {
+          "path": "src/registry/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

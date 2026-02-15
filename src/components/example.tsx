@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/registry/lib/utils"
 
 function ExampleWrapper({ className, ...props }: React.ComponentProps<"div">) {
   return (
