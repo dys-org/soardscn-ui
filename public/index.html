@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>soardscn-ui Registry</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        background: #f8fafc;
+        color: #0f172a;
+      }
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 48px 20px;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 2rem;
+      }
+      p {
+        margin: 0 0 14px;
+        line-height: 1.55;
+      }
+      .card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 16px;
+        margin: 18px 0;
+      }
+      code, pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
+      }
+      pre {
+        margin: 10px 0 0;
+        overflow-x: auto;
+        padding: 12px;
+        background: #0f172a;
+        color: #e2e8f0;
+        border-radius: 8px;
+      }
+      ul {
+        margin: 8px 0 0;
+      }
+      a {
+        color: #0f766e;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>soardscn-ui Registry</h1>
+      <p>
+        This GitHub Pages site serves a shadcn-compatible component registry.
+      </p>
+
+      <section class="card">
+        <strong>Registry endpoints</strong>
+        <ul>
+          <li><a href="/soardscn-ui/r/registry.json">/r/registry.json</a></li>
+          <li><a href="/soardscn-ui/r/ui/button.json">/r/ui/button.json</a></li>
+          <li><a href="/soardscn-ui/r/lib/utils.json">/r/lib/utils.json</a></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <strong>Consumer <code>components.json</code></strong>
+        <pre>{
+  "registries": {
+    "@ui": "https://dys-org.github.io/soardscn-ui/r/ui/{name}.json",
+    "@lib": "https://dys-org.github.io/soardscn-ui/r/lib/{name}.json"
+  }
+}</pre>
+      </section>
+
+      <section class="card">
+        <strong>Install example</strong>
+        <pre>pnpm dlx shadcn@latest add @ui/button</pre>
+      </section>
+    </main>
+  </body>
+</html>
