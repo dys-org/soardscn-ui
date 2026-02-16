@@ -30,7 +30,6 @@ This produces:
 
 - `public/r/ui/*.json` for `registry:ui` items
 - `public/r/components/*.json` for `registry:component` items
-- `public/r/lib/*.json` for `registry:lib` items
 
 During `pnpm build`, `public/r/*` is copied into `dist/r/*` for Pages deployment.
 
