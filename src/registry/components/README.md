@@ -8,6 +8,8 @@ Guidelines:
 - Compose from `@/registry/ui/*` and `@/registry/lib/*`.
 - Keep primitives generic in `ui`; place app-like logic, orchestration, and
   opinionated defaults in `components`.
+- Place distributable component sources under
+  `src/registry/components/<name>/`.
 - Group each component-level item in its own folder when it has multiple files
   (`index.ts`, types, helpers, tests).
 

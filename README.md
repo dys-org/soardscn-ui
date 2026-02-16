@@ -10,7 +10,6 @@ Build registry artifacts:
 pnpm registry:build
 ```
 
-w
 This produces:
 
 - `public/r/ui/*.json` for `registry:ui` items

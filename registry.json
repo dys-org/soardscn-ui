@@ -174,7 +174,15 @@
       "dependencies": ["class-variance-authority"],
       "files": [
         {
+          "path": "src/registry/components/multi-select/index.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/registry/components/multi-select/multi-select.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/components/multi-select/multi-select.types.ts",
           "type": "registry:component"
         }
       ]
