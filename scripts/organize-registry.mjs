@@ -5,6 +5,7 @@ const outputRoot = path.resolve(process.cwd(), 'public/r')
 
 const TYPE_TO_DIR = {
   'registry:ui': 'ui',
+  'registry:component': 'components',
   'registry:lib': 'lib',
 }
 
@@ -27,12 +28,15 @@ async function main() {
   }
 
   const uiDir = path.join(outputRoot, 'ui')
+  const componentsDir = path.join(outputRoot, 'components')
   const libDir = path.join(outputRoot, 'lib')
 
   // Clear grouped output so the script is idempotent and stale files do not linger.
   await fs.rm(uiDir, { recursive: true, force: true })
+  await fs.rm(componentsDir, { recursive: true, force: true })
   await fs.rm(libDir, { recursive: true, force: true })
   await ensureDir(uiDir)
+  await ensureDir(componentsDir)
   await ensureDir(libDir)
 
   const entries = await fs.readdir(outputRoot, { withFileTypes: true })
@@ -62,7 +66,9 @@ async function main() {
     await fs.rename(source, destination)
   }
 
-  console.log('Registry output organized into public/r/ui and public/r/lib')
+  console.log(
+    'Registry output organized into public/r/ui, public/r/components, and public/r/lib',
+  )
 }
 
 main().catch((error) => {

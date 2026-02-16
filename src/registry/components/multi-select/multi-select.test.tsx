@@ -2,9 +2,9 @@ import { afterEach, describe, expect, it } from "vitest"
 import { act, type ReactNode } from "react"
 import { createRoot, type Root } from "react-dom/client"
 
-import { MultiSelect } from "@/registry/enhanced/multi-select"
+import { MultiSelect } from "@/registry/components/multi-select"
 
-describe("enhanced multi-select render smoke test", () => {
+describe("component multi-select render smoke test", () => {
   let root: Root | null = null
   let container: HTMLDivElement | null = null
 

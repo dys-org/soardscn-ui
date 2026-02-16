@@ -13,10 +13,9 @@
   "iconLibrary": "remixicon",
   "rtl": false,
   "aliases": {
-    "components": "@/registry",
+    "components": "@/registry/components",
     "utils": "@/registry/lib/utils",
     "ui": "@/registry/ui",
-    "enhanced": "@/registry/enhanced",
     "lib": "@/registry/lib",
     "hooks": "@/hooks"
   },

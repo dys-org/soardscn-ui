@@ -5,7 +5,7 @@ import * as React from "react"
 import {
   Example,
   ExampleWrapper,
-} from "@/components/example"
+} from "@/app-components/example"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -56,7 +56,7 @@ import {
 } from "@/registry/ui/dropdown-menu"
 import { Field, FieldGroup, FieldLabel } from "@/registry/ui/field"
 import { Input } from "@/registry/ui/input"
-import { MultiSelect } from "@/registry/enhanced/multi-select"
+import { MultiSelect } from "@/registry/components/multi-select"
 import {
   Select,
   SelectContent,
@@ -540,7 +540,7 @@ function FormExample() {
           <CardHeader>
             <CardTitle>MultiSelect Variants</CardTitle>
             <CardDescription>
-              Compare validation/semantic tones for the enhanced multi-select.
+              Compare validation/semantic tones for the component-level multi-select.
             </CardDescription>
           </CardHeader>
           <CardContent>

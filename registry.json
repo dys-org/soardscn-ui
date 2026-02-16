@@ -169,13 +169,13 @@
     },
     {
       "name": "multi-select",
-      "type": "registry:ui",
+      "type": "registry:component",
       "registryDependencies": ["utils", "@ui/combobox", "@ui/badge"],
       "dependencies": ["class-variance-authority"],
       "files": [
         {
-          "path": "src/registry/enhanced/multi-select/multi-select.tsx",
-          "type": "registry:ui"
+          "path": "src/registry/components/multi-select/multi-select.tsx",
+          "type": "registry:component"
         }
       ]
     }
