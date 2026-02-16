@@ -246,6 +246,46 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:component",
+      "registryDependencies": ["utils", "@ui/button", "@ui/calendar", "@ui/popover"],
+      "dependencies": ["date-fns"],
+      "files": [
+        {
+          "path": "src/registry/components/date-picker/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/components/date-picker/date-picker.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/components/date-picker/date-picker.types.ts",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "date-range-picker",
+      "type": "registry:component",
+      "registryDependencies": ["utils", "@ui/button", "@ui/calendar", "@ui/popover"],
+      "dependencies": ["date-fns"],
+      "files": [
+        {
+          "path": "src/registry/components/date-range-picker/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/components/date-range-picker/date-range-picker.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/components/date-range-picker/date-range-picker.types.ts",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }

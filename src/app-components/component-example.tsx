@@ -53,6 +53,8 @@ import {
 } from '@/registry/ui/dropdown-menu'
 import { Field, FieldGroup, FieldLabel } from '@/registry/ui/field'
 import { Input } from '@/registry/ui/input'
+import { DatePicker } from '@/registry/components/date-picker'
+import { DateRangePicker } from '@/registry/components/date-range-picker'
 import { MultiSelect } from '@/registry/components/multi-select'
 import {
   Select,
@@ -92,7 +94,9 @@ import {
   RiQuestionLine,
   RiFileTextLine,
   RiLogoutBoxLine,
+  RiCalendarLine,
 } from '@remixicon/react'
+import type { DateRange } from 'react-day-picker'
 
 export function ComponentExample() {
   return (
@@ -196,6 +200,10 @@ function FormExample() {
   })
   const [theme, setTheme] = React.useState('light')
   const [skills, setSkills] = React.useState<string[]>(['react', 'typescript'])
+  const [startDate, setStartDate] = React.useState<Date | undefined>(undefined)
+  const [deliveryWindow, setDeliveryWindow] = React.useState<
+    DateRange | undefined
+  >(undefined)
 
   return (
     <Example title="Form">
@@ -533,6 +541,63 @@ function FormExample() {
                 </Field>
               </FieldGroup>
             </form>
+          </CardContent>
+        </Card>
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Date Pickers</CardTitle>
+            <CardDescription>
+              Controlled single-date and range-date examples with default and
+              custom triggers.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <FieldGroup>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <Field>
+                  <FieldLabel>Start date</FieldLabel>
+                  <DatePicker
+                    value={startDate}
+                    onValueChange={setStartDate}
+                    placeholder="Pick a start date"
+                  />
+                </Field>
+                <Field>
+                  <FieldLabel>Delivery window</FieldLabel>
+                  <DateRangePicker
+                    value={deliveryWindow}
+                    onValueChange={setDeliveryWindow}
+                    placeholder="Pick a date range"
+                  />
+                </Field>
+                <Field>
+                  <FieldLabel>Custom single trigger</FieldLabel>
+                  <DatePicker
+                    value={startDate}
+                    onValueChange={setStartDate}
+                    trigger={
+                      <Button variant="outline">
+                        <RiCalendarLine data-icon="inline-start" />
+                        Choose date
+                      </Button>
+                    }
+                  />
+                </Field>
+                <Field>
+                  <FieldLabel>Custom range trigger</FieldLabel>
+                  <DateRangePicker
+                    value={deliveryWindow}
+                    onValueChange={setDeliveryWindow}
+                    trigger={
+                      <Button variant="outline">
+                        <RiCalendarLine data-icon="inline-start" />
+                        Choose range
+                      </Button>
+                    }
+                  />
+                </Field>
+              </div>
+            </FieldGroup>
           </CardContent>
         </Card>
         <Card className="w-full">
