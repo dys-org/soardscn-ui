@@ -2,6 +2,22 @@
 
 Local component library and shadcn registry source for `@ui/*` and `@components/*`.
 
+This project is a plain Vite React app deployed to GitHub Pages with hash-based navigation for showcase pages.
+
+## Development
+
+Run the app locally:
+
+```bash
+pnpm dev
+```
+
+Build app + static assets:
+
+```bash
+pnpm build
+```
+
 ## Registry build
 
 Build registry artifacts:
@@ -15,6 +31,17 @@ This produces:
 - `public/r/ui/*.json` for `registry:ui` items
 - `public/r/components/*.json` for `registry:component` items
 - `public/r/lib/*.json` for `registry:lib` items
+
+During `pnpm build`, `public/r/*` is copied into `dist/r/*` for Pages deployment.
+
+## Routing
+
+Showcase navigation uses hash routes:
+
+- home: `/#/`
+- app showcase: `/#/showcase`
+
+This avoids SPA deep-link rewrite requirements on GitHub Pages.
 
 ## Consumer setup
 
