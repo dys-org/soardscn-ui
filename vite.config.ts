@@ -14,6 +14,7 @@ const config = defineConfig(({ mode }) => ({
   ],
   test: {
     include: ['src/**/*.test.ts?(x)'],
+    setupFiles: ['./src/test/setup.ts'],
     browser: {
       enabled: true,
       provider: 'playwright',
