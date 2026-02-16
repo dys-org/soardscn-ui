@@ -2,4 +2,11 @@
 
 import { tanstackConfig } from '@tanstack/eslint-config'
 
-export default [...tanstackConfig]
+export default [
+  ...tanstackConfig,
+  {
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+]
