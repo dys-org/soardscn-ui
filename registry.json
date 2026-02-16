@@ -144,6 +144,66 @@
       ]
     },
     {
+      "name": "dialog",
+      "type": "registry:ui",
+      "registryDependencies": ["utils", "@ui/button"],
+      "dependencies": ["@base-ui/react", "@remixicon/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "registryDependencies": ["utils"],
+      "dependencies": ["@remixicon/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/native-select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "registryDependencies": ["utils", "@ui/button"],
+      "dependencies": ["react-day-picker", "@remixicon/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "registryDependencies": ["utils"],
+      "dependencies": ["@base-ui/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "registryDependencies": ["utils"],
+      "dependencies": ["@base-ui/react"],
+      "files": [
+        {
+          "path": "src/registry/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "combobox",
       "type": "registry:ui",
       "registryDependencies": ["utils", "@ui/button", "@ui/input-group"],
