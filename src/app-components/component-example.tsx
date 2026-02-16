@@ -1,8 +1,43 @@
 'use client'
 
 import * as React from 'react'
+import {
+  RiAddLine,
+  RiBankCardLine,
+  RiBluetoothLine,
+  RiCalendarLine,
+  RiCodeLine,
+  RiComputerLine,
+  RiDownloadLine,
+  RiEyeLine,
+  RiFileLine,
+  RiFileTextLine,
+  RiFolderLine,
+  RiFolderOpenLine,
+  RiKeyboardLine,
+  RiLayoutLine,
+  RiLogoutBoxLine,
+  RiMailLine,
+  RiMoonLine,
+  RiMore2Line,
+  RiMoreLine,
+  RiNotificationLine,
+  RiPaletteLine,
+  RiQuestionLine,
+  RiSaveLine,
+  RiSearchLine,
+  RiSettingsLine,
+  RiShieldLine,
+  RiSunLine,
+  RiTranslate,
+  RiUserLine,
+} from '@remixicon/react'
+import type { DateRange } from 'react-day-picker'
 
 import { Example, ExampleWrapper } from '@/app-components/example'
+import { DatePicker } from '@/registry/components/date-picker'
+import { DateRangePicker } from '@/registry/components/date-range-picker'
+import { MultiSelect } from '@/registry/components/multi-select'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,6 +52,7 @@ import {
 } from '@/registry/ui/alert-dialog'
 import { Badge } from '@/registry/ui/badge'
 import { Button } from '@/registry/ui/button'
+import { Calendar } from '@/registry/ui/calendar'
 import {
   Card,
   CardAction,
@@ -52,10 +88,28 @@ import {
   DropdownMenuTrigger,
 } from '@/registry/ui/dropdown-menu'
 import { Field, FieldGroup, FieldLabel } from '@/registry/ui/field'
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+} from '@/registry/ui/input-group'
 import { Input } from '@/registry/ui/input'
-import { DatePicker } from '@/registry/components/date-picker'
-import { DateRangePicker } from '@/registry/components/date-range-picker'
-import { MultiSelect } from '@/registry/components/multi-select'
+import { Label } from '@/registry/ui/label'
+import {
+  NativeSelect,
+  NativeSelectOptGroup,
+  NativeSelectOption,
+} from '@/registry/ui/native-select'
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+} from '@/registry/ui/popover'
 import {
   Select,
   SelectContent,
@@ -64,44 +118,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/registry/ui/select'
+import { Separator } from '@/registry/ui/separator'
 import { Textarea } from '@/registry/ui/textarea'
 import {
-  RiAddLine,
-  RiBluetoothLine,
-  RiMore2Line,
-  RiFileLine,
-  RiFolderLine,
-  RiFolderOpenLine,
-  RiCodeLine,
-  RiMoreLine,
-  RiSearchLine,
-  RiSaveLine,
-  RiDownloadLine,
-  RiEyeLine,
-  RiLayoutLine,
-  RiPaletteLine,
-  RiSunLine,
-  RiMoonLine,
-  RiComputerLine,
-  RiUserLine,
-  RiBankCardLine,
-  RiSettingsLine,
-  RiKeyboardLine,
-  RiTranslate,
-  RiNotificationLine,
-  RiMailLine,
-  RiShieldLine,
-  RiQuestionLine,
-  RiFileTextLine,
-  RiLogoutBoxLine,
-  RiCalendarLine,
-} from '@remixicon/react'
-import type { DateRange } from 'react-day-picker'
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/registry/ui/tooltip'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/registry/ui/dialog'
 
 export function ComponentExample() {
   return (
     <ExampleWrapper className="mx-0 max-w-none min-h-0 content-start p-0 pt-0 sm:p-0 lg:p-0">
-      <CardExample />
+      <div className="contents md:flex md:flex-col md:gap-8">
+        <CardExample />
+        <PrimitivesExample />
+      </div>
       <FormExample />
     </ExampleWrapper>
   )
@@ -109,7 +150,11 @@ export function ComponentExample() {
 
 function CardExample() {
   return (
-    <Example title="Card" className="items-center justify-center">
+    <Example
+      title="Card"
+      className="items-center justify-center"
+      containerClassName="self-start"
+    >
       <Card className="relative w-full max-w-sm overflow-hidden pt-0">
         <div className="bg-primary absolute inset-0 z-30 aspect-video opacity-50 mix-blend-color" />
         <img
@@ -199,7 +244,10 @@ function FormExample() {
     push: true,
   })
   const [theme, setTheme] = React.useState('light')
-  const [skills, setSkills] = React.useState<string[]>(['react', 'typescript'])
+  const [skills, setSkills] = React.useState<Array<string>>([
+    'react',
+    'typescript',
+  ])
   const [startDate, setStartDate] = React.useState<Date | undefined>(undefined)
   const [deliveryWindow, setDeliveryWindow] = React.useState<
     DateRange | undefined
@@ -650,6 +698,151 @@ function FormExample() {
                 />
               </Field>
             </FieldGroup>
+          </CardContent>
+        </Card>
+      </div>
+    </Example>
+  )
+}
+
+function PrimitivesExample() {
+  const [calendarDate, setCalendarDate] = React.useState<Date | undefined>(
+    new Date(),
+  )
+
+  return (
+    <Example title="Registry Primitives">
+      <div className="grid w-full gap-4">
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>InputGroup & NativeSelect</CardTitle>
+            <CardDescription>
+              Input composition and browser-native select styling.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="example-email-group">Email</FieldLabel>
+                <InputGroup>
+                  <InputGroupAddon align="inline-start">
+                    <InputGroupText>@</InputGroupText>
+                  </InputGroupAddon>
+                  <InputGroupInput
+                    id="example-email-group"
+                    placeholder="username"
+                  />
+                  <InputGroupAddon align="inline-end">
+                    <InputGroupText>soards.dev</InputGroupText>
+                  </InputGroupAddon>
+                </InputGroup>
+              </Field>
+              <Field>
+                <FieldLabel>Search</FieldLabel>
+                <InputGroup>
+                  <InputGroupAddon>
+                    <RiSearchLine />
+                  </InputGroupAddon>
+                  <InputGroupInput placeholder="Search components..." />
+                  <InputGroupAddon align="inline-end">
+                    <InputGroupButton size="xs">Go</InputGroupButton>
+                  </InputGroupAddon>
+                </InputGroup>
+              </Field>
+              <Field>
+                <Label htmlFor="example-native-select">Time zone</Label>
+                <NativeSelect id="example-native-select" className="w-full">
+                  <NativeSelectOptGroup label="United States">
+                    <NativeSelectOption value="pst">
+                      Pacific Time (PT)
+                    </NativeSelectOption>
+                    <NativeSelectOption value="mst">
+                      Mountain Time (MT)
+                    </NativeSelectOption>
+                    <NativeSelectOption value="cst">
+                      Central Time (CT)
+                    </NativeSelectOption>
+                    <NativeSelectOption value="est">
+                      Eastern Time (ET)
+                    </NativeSelectOption>
+                  </NativeSelectOptGroup>
+                </NativeSelect>
+              </Field>
+            </FieldGroup>
+          </CardContent>
+        </Card>
+
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Dialog, Popover, Tooltip, Separator</CardTitle>
+            <CardDescription>
+              Overlay primitives and content separation.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap items-center gap-3">
+              <Dialog>
+                <DialogTrigger render={<Button variant="outline" />}>
+                  Open Dialog
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Keyboard shortcuts</DialogTitle>
+                    <DialogDescription>
+                      Use <kbd data-slot="kbd">/</kbd> to focus search and{' '}
+                      <kbd data-slot="kbd">?</kbd> for help.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter showCloseButton>
+                    <Button>Save preferences</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+              <Popover>
+                <PopoverTrigger render={<Button variant="outline" />}>
+                  Open Popover
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverHeader>
+                    <PopoverTitle>Quick Note</PopoverTitle>
+                    <PopoverDescription>
+                      This popover uses the registry popover primitives.
+                    </PopoverDescription>
+                  </PopoverHeader>
+                </PopoverContent>
+              </Popover>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger render={<Button variant="outline" />}>
+                    Hover Tooltip
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Tooltip content from the registry UI.
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+            <Separator className="my-4" />
+            <div className="text-muted-foreground text-xs">
+              Separators are useful for grouping related actions and content.
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Calendar</CardTitle>
+            <CardDescription>
+              Standalone calendar primitive (also used by date pickers).
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Calendar
+              mode="single"
+              selected={calendarDate}
+              onSelect={setCalendarDate}
+              className="rounded-md border"
+            />
           </CardContent>
         </Card>
       </div>
