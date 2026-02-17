@@ -4,6 +4,8 @@ Local component library and shadcn registry source for `@ui/*` and `@components/
 
 This project is a plain Vite React app deployed to GitHub Pages with hash-based navigation for showcase pages.
 
+GitHub Pages: [https://dys-org.github.io/soardscn-ui/](https://dys-org.github.io/soardscn-ui/)
+
 ## Development
 
 Run the app locally:
