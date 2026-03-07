@@ -1,8 +1,13 @@
-import { act, useState, type ReactNode } from 'react'
-import { createRoot, type Root } from 'react-dom/client'
+import { act, useState } from 'react'
+import { createRoot } from 'react-dom/client'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { format } from 'date-fns'
+import type { Root } from 'react-dom/client'
+import type { ReactNode } from 'react'
+import type { DateRange } from 'react-day-picker'
+
+import { DateRangePicker } from '@/registry/components/date-range-picker'
 
 vi.mock('@/registry/ui/calendar', () => ({
   Calendar: ({
@@ -10,17 +15,17 @@ vi.mock('@/registry/ui/calendar', () => ({
   }: {
     onSelect?: (value: { from?: Date; to?: Date } | undefined) => void
   }) => (
-    <div data-slot='calendar'>
+    <div data-slot="calendar">
       <button
-        type='button'
-        data-testid='calendar-select-start'
+        type="button"
+        data-testid="calendar-select-start"
         onClick={() => onSelect?.({ from: new Date(2024, 0, 10) })}
       >
         Select start
       </button>
       <button
-        type='button'
-        data-testid='calendar-select-end'
+        type="button"
+        data-testid="calendar-select-end"
         onClick={() =>
           onSelect?.({ from: new Date(2024, 0, 10), to: new Date(2024, 0, 20) })
         }
@@ -30,8 +35,6 @@ vi.mock('@/registry/ui/calendar', () => ({
     </div>
   ),
 }))
-
-import { DateRangePicker } from '@/registry/components/date-range-picker'
 
 describe('component date-range-picker', () => {
   let root: Root | null = null
@@ -70,8 +73,12 @@ describe('component date-range-picker', () => {
   it('renders root and default trigger', async () => {
     await mount(<DateRangePicker value={undefined} onValueChange={() => {}} />)
 
-    expect(document.querySelector("[data-slot='date-range-picker']")).toBeTruthy()
-    expect(document.querySelector("[data-slot='date-range-picker-trigger']")).toBeTruthy()
+    expect(
+      document.querySelector("[data-slot='date-range-picker']"),
+    ).toBeTruthy()
+    expect(
+      document.querySelector("[data-slot='date-range-picker-trigger']"),
+    ).toBeTruthy()
     expect(document.body.textContent).toContain('Pick a date range')
   })
 
@@ -92,9 +99,7 @@ describe('component date-range-picker', () => {
     const onValueChange = vi.fn()
 
     function ControlledRangePicker() {
-      const [value, setValue] = useState<{ from?: Date; to?: Date } | undefined>(
-        undefined,
-      )
+      const [value, setValue] = useState<DateRange | undefined>(undefined)
 
       return (
         <DateRangePicker
@@ -104,16 +109,19 @@ describe('component date-range-picker', () => {
             onValueChange(nextValue)
           }}
           numberOfMonths={1}
-          calendarProps={{ defaultMonth: new Date(2024, 0, 1), showOutsideDays: false }}
+          calendarProps={{
+            defaultMonth: new Date(2024, 0, 1),
+            showOutsideDays: false,
+          }}
         />
       )
     }
 
-    await mount(
-      <ControlledRangePicker />,
-    )
+    await mount(<ControlledRangePicker />)
 
-    await click(document.querySelector("[data-slot='date-range-picker-trigger']"))
+    await click(
+      document.querySelector("[data-slot='date-range-picker-trigger']"),
+    )
     await click(document.querySelector("[data-testid='calendar-select-start']"))
     await click(document.querySelector("[data-testid='calendar-select-end']"))
 
@@ -130,14 +138,16 @@ describe('component date-range-picker', () => {
         value={undefined}
         onValueChange={() => {}}
         trigger={
-          <button type='button' data-testid='custom-date-range-trigger'>
+          <button type="button" data-testid="custom-date-range-trigger">
             Open Custom Range Trigger
           </button>
         }
       />,
     )
 
-    await click(document.querySelector("[data-testid='custom-date-range-trigger']"))
+    await click(
+      document.querySelector("[data-testid='custom-date-range-trigger']"),
+    )
 
     expect(document.querySelector("[data-slot='calendar']")).toBeTruthy()
   })

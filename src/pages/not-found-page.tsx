@@ -10,7 +10,9 @@ export function NotFoundPage() {
       </header>
       <main className="mx-auto max-w-3xl px-5 py-12">
         <section className="bg-card rounded-xl border border-border p-6">
-          <h1 className="text-2xl font-semibold tracking-tight">Page not found</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">
+            Page not found
+          </h1>
           <p className="text-muted-foreground mt-2 text-sm">
             The route you requested does not exist.
           </p>

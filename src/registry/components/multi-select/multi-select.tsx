@@ -1,8 +1,17 @@
-import * as React from "react"
-import { cva } from "class-variance-authority"
+import * as React from 'react'
+import { cva } from 'class-variance-authority'
 
-import { cn } from "@/registry/lib/utils"
-import { Badge } from "@/registry/ui/badge"
+import type {
+  MultiSelectDevice,
+  MultiSelectDeviceConfig,
+  MultiSelectGroup,
+  MultiSelectOption,
+  MultiSelectOptions,
+  MultiSelectResponsiveConfig,
+  MultiSelectVariant,
+} from './multi-select.types'
+import { cn } from '@/registry/lib/utils'
+import { Badge } from '@/registry/ui/badge'
 import {
   Combobox,
   ComboboxChips,
@@ -15,48 +24,38 @@ import {
   ComboboxList,
   ComboboxTrigger,
   useComboboxAnchor,
-} from "@/registry/ui/combobox"
-
-import type {
-  MultiSelectDevice,
-  MultiSelectDeviceConfig,
-  MultiSelectGroup,
-  MultiSelectOption,
-  MultiSelectOptions,
-  MultiSelectResponsiveConfig,
-  MultiSelectVariant,
-} from "./multi-select.types"
+} from '@/registry/ui/combobox'
 
 const multiSelectTriggerVariants = cva(
-  "border-input bg-input/20 dark:bg-input/30 focus-within:border-ring focus-within:ring-ring/30 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive dark:has-aria-invalid:border-destructive/50 flex min-h-7 w-full items-center gap-1 rounded-md border px-2 py-0.5 text-xs/relaxed transition-colors focus-within:ring-2 has-aria-invalid:ring-2",
+  'border-input bg-input/20 dark:bg-input/30 focus-within:border-ring focus-within:ring-ring/30 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive dark:has-aria-invalid:border-destructive/50 flex min-h-7 w-full items-center gap-1 rounded-md border px-2 py-0.5 text-xs/relaxed transition-colors focus-within:ring-2 has-aria-invalid:ring-2',
   {
     variants: {
       variant: {
-        neutral: "",
+        neutral: '',
         success:
-          "border-emerald-500/40 focus-within:ring-emerald-500/25 focus-within:border-emerald-500/60",
+          'border-emerald-500/40 focus-within:ring-emerald-500/25 focus-within:border-emerald-500/60',
         warning:
-          "border-amber-500/40 focus-within:ring-amber-500/25 focus-within:border-amber-500/60",
+          'border-amber-500/40 focus-within:ring-amber-500/25 focus-within:border-amber-500/60',
         error:
-          "border-destructive/60 focus-within:ring-destructive/25 focus-within:border-destructive/70",
+          'border-destructive/60 focus-within:ring-destructive/25 focus-within:border-destructive/70',
       },
       singleLine: {
-        true: "flex-nowrap overflow-hidden",
-        false: "flex-wrap",
+        true: 'flex-nowrap overflow-hidden',
+        false: 'flex-wrap',
       },
     },
     defaultVariants: {
-      variant: "neutral",
+      variant: 'neutral',
       singleLine: false,
     },
   },
 )
 
 const badgeToneClasses: Record<MultiSelectVariant, string> = {
-  neutral: "",
-  success: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300",
-  warning: "bg-amber-500/15 text-amber-700 dark:text-amber-300",
-  error: "bg-destructive/15 text-destructive",
+  neutral: '',
+  success: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300',
+  warning: 'bg-amber-500/15 text-amber-700 dark:text-amber-300',
+  error: 'bg-destructive/15 text-destructive',
 }
 
 const responsiveDefaults: Record<MultiSelectDevice, MultiSelectDeviceConfig> = {
@@ -67,9 +66,9 @@ const responsiveDefaults: Record<MultiSelectDevice, MultiSelectDeviceConfig> = {
 
 type MultiSelectProps = {
   options: MultiSelectOptions
-  value?: string[]
-  defaultValue?: string[]
-  onValueChange?: (value: string[]) => void
+  value?: Array<string>
+  defaultValue?: Array<string>
+  onValueChange?: (value: Array<string>) => void
   placeholder?: string
   searchable?: boolean
   variant?: MultiSelectVariant
@@ -86,25 +85,25 @@ type MultiSelectProps = {
 
 function isGroupedOptions(
   options: MultiSelectOptions,
-): options is MultiSelectGroup[] {
+): options is Array<MultiSelectGroup> {
   const first = options[0] as MultiSelectOption | MultiSelectGroup | undefined
-  return Boolean(first && "options" in first)
+  return Boolean(first && 'options' in first)
 }
 
 function getDevice(): MultiSelectDevice {
-  if (typeof window === "undefined") {
-    return "desktop"
+  if (typeof window === 'undefined') {
+    return 'desktop'
   }
 
-  if (window.matchMedia("(max-width: 639px)").matches) {
-    return "mobile"
+  if (window.matchMedia('(max-width: 639px)').matches) {
+    return 'mobile'
   }
 
-  if (window.matchMedia("(max-width: 1023px)").matches) {
-    return "tablet"
+  if (window.matchMedia('(max-width: 1023px)').matches) {
+    return 'tablet'
   }
 
-  return "desktop"
+  return 'desktop'
 }
 
 function useResponsiveDevice(enabled: boolean): MultiSelectDevice {
@@ -116,12 +115,12 @@ function useResponsiveDevice(enabled: boolean): MultiSelectDevice {
     }
 
     const onResize = () => setDevice(getDevice())
-    window.addEventListener("resize", onResize)
+    window.addEventListener('resize', onResize)
 
-    return () => window.removeEventListener("resize", onResize)
+    return () => window.removeEventListener('resize', onResize)
   }, [enabled])
 
-  return enabled ? device : "desktop"
+  return enabled ? device : 'desktop'
 }
 
 function MultiSelect({
@@ -129,24 +128,24 @@ function MultiSelect({
   value,
   defaultValue,
   onValueChange,
-  placeholder = "Select options",
+  placeholder = 'Select options',
   searchable = true,
-  variant = "neutral",
+  variant = 'neutral',
   disabled = false,
   maxVisibleSelected = 3,
   singleLine = false,
   responsive = true,
   responsiveConfig,
-  emptyText = "No options found.",
+  emptyText = 'No options found.',
   overflowLabel,
-  ariaLabel = "Multi-select options",
+  ariaLabel = 'Multi-select options',
   className,
 }: MultiSelectProps) {
-  const [internalValue, setInternalValue] = React.useState<string[]>(
+  const [internalValue, setInternalValue] = React.useState<Array<string>>(
     defaultValue ?? [],
   )
   const selectedValues = value ?? internalValue
-  const [query, setQuery] = React.useState("")
+  const [query, setQuery] = React.useState('')
   const anchorRef = useComboboxAnchor()
 
   const device = useResponsiveDevice(responsive)
@@ -155,19 +154,22 @@ function MultiSelect({
     const overrides = responsiveConfig?.[device] ?? {}
 
     return {
-      maxVisibleSelected: overrides.maxVisibleSelected ?? defaults.maxVisibleSelected ?? maxVisibleSelected,
+      maxVisibleSelected:
+        overrides.maxVisibleSelected ??
+        defaults.maxVisibleSelected ??
+        maxVisibleSelected,
       singleLine: overrides.singleLine ?? defaults.singleLine ?? singleLine,
     }
   }, [device, maxVisibleSelected, responsiveConfig, singleLine])
 
-  const normalizedGroups = React.useMemo<MultiSelectGroup[]>(() => {
+  const normalizedGroups = React.useMemo<Array<MultiSelectGroup>>(() => {
     if (isGroupedOptions(options)) {
       return options
     }
 
     return [
       {
-        label: "",
+        label: '',
         options,
       },
     ]
@@ -196,7 +198,7 @@ function MultiSelect({
             option.value,
             ...(option.keywords ?? []),
           ]
-            .join(" ")
+            .join(' ')
             .toLowerCase()
 
           return searchTarget.includes(needle)
@@ -207,7 +209,9 @@ function MultiSelect({
 
   const filteredValues = React.useMemo(
     () =>
-      filteredGroups.flatMap((group) => group.options.map((option) => option.value)),
+      filteredGroups.flatMap((group) =>
+        group.options.map((option) => option.value),
+      ),
     [filteredGroups],
   )
 
@@ -229,7 +233,7 @@ function MultiSelect({
   )
 
   const updateSelectedValues = React.useCallback(
-    (nextValue: string[]) => {
+    (nextValue: Array<string>) => {
       if (value === undefined) {
         setInternalValue(nextValue)
       }
@@ -241,20 +245,22 @@ function MultiSelect({
   const removeValue = React.useCallback(
     (valueToRemove: string) => {
       updateSelectedValues(
-        selectedValues.filter((selectedValue) => selectedValue !== valueToRemove),
+        selectedValues.filter(
+          (selectedValue) => selectedValue !== valueToRemove,
+        ),
       )
     },
     [selectedValues, updateSelectedValues],
   )
 
   const handleValueChange = React.useCallback(
-    (nextValue: string[] | string | null) => {
+    (nextValue: Array<string> | string | null) => {
       if (Array.isArray(nextValue)) {
         updateSelectedValues(nextValue)
         return
       }
 
-      if (typeof nextValue === "string") {
+      if (typeof nextValue === 'string') {
         updateSelectedValues([nextValue])
         return
       }
@@ -290,9 +296,9 @@ function MultiSelect({
               key={selectedOption.value}
               variant="secondary"
               className={cn(
-                "max-w-full gap-1 truncate",
+                'max-w-full gap-1 truncate',
                 badgeToneClasses[variant],
-                resolvedConfig.singleLine && "shrink-0",
+                resolvedConfig.singleLine && 'shrink-0',
               )}
             >
               <span className="truncate">{selectedOption.label}</span>
@@ -313,7 +319,7 @@ function MultiSelect({
           {hiddenCount > 0 && (
             <Badge
               variant="outline"
-              className={cn("shrink-0", badgeToneClasses[variant])}
+              className={cn('shrink-0', badgeToneClasses[variant])}
             >
               {overflowLabel ? overflowLabel(hiddenCount) : `+${hiddenCount}`}
             </Badge>
@@ -322,8 +328,8 @@ function MultiSelect({
           <ComboboxChipsInput
             aria-label={ariaLabel}
             className={cn(
-              "min-w-14 flex-1 bg-transparent outline-none",
-              !searchable && "w-0 min-w-0 p-0 opacity-0",
+              'min-w-14 flex-1 bg-transparent outline-none',
+              !searchable && 'w-0 min-w-0 p-0 opacity-0',
             )}
             placeholder={selectedOptions.length ? undefined : placeholder}
             readOnly={!searchable}
@@ -339,7 +345,9 @@ function MultiSelect({
                 key={group.label || `group-${index}`}
                 items={group.options.map((option) => option.value)}
               >
-                {group.label ? <ComboboxLabel>{group.label}</ComboboxLabel> : null}
+                {group.label ? (
+                  <ComboboxLabel>{group.label}</ComboboxLabel>
+                ) : null}
                 {group.options.map((option) => (
                   <ComboboxItem
                     key={option.value}
@@ -354,7 +362,11 @@ function MultiSelect({
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
-      <span aria-live="polite" className="sr-only" data-slot="multi-select-status">
+      <span
+        aria-live="polite"
+        className="sr-only"
+        data-slot="multi-select-status"
+      >
         {selectedValues.length} selected
       </span>
     </div>

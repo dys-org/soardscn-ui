@@ -1,20 +1,22 @@
-export type MultiSelectVariant = "neutral" | "success" | "warning" | "error"
+export type MultiSelectVariant = 'neutral' | 'success' | 'warning' | 'error'
 
-export type MultiSelectDevice = "mobile" | "tablet" | "desktop"
+export type MultiSelectDevice = 'mobile' | 'tablet' | 'desktop'
 
 export type MultiSelectOption = {
   label: string
   value: string
   disabled?: boolean
-  keywords?: string[]
+  keywords?: Array<string>
 }
 
 export type MultiSelectGroup = {
   label: string
-  options: MultiSelectOption[]
+  options: Array<MultiSelectOption>
 }
 
-export type MultiSelectOptions = MultiSelectOption[] | MultiSelectGroup[]
+export type MultiSelectOptions =
+  | Array<MultiSelectOption>
+  | Array<MultiSelectGroup>
 
 export type MultiSelectDeviceConfig = {
   maxVisibleSelected?: number

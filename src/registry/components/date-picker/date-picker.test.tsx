@@ -1,8 +1,12 @@
-import { act, useState, type ReactNode } from 'react'
-import { createRoot, type Root } from 'react-dom/client'
+import { act, useState } from 'react'
+import { createRoot } from 'react-dom/client'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { format } from 'date-fns'
+import type { Root } from 'react-dom/client'
+import type { ReactNode } from 'react'
+
+import { DatePicker } from '@/registry/components/date-picker'
 
 vi.mock('@/registry/ui/calendar', () => ({
   Calendar: ({
@@ -10,10 +14,10 @@ vi.mock('@/registry/ui/calendar', () => ({
   }: {
     onSelect?: (value: Date | undefined) => void
   }) => (
-    <div data-slot='calendar'>
+    <div data-slot="calendar">
       <button
-        type='button'
-        data-testid='calendar-select-date'
+        type="button"
+        data-testid="calendar-select-date"
         onClick={() => onSelect?.(new Date(2024, 0, 15))}
       >
         Select date
@@ -21,8 +25,6 @@ vi.mock('@/registry/ui/calendar', () => ({
     </div>
   ),
 }))
-
-import { DatePicker } from '@/registry/components/date-picker'
 
 describe('component date-picker', () => {
   let root: Root | null = null
@@ -62,7 +64,9 @@ describe('component date-picker', () => {
     await mount(<DatePicker value={undefined} onValueChange={() => {}} />)
 
     expect(document.querySelector("[data-slot='date-picker']")).toBeTruthy()
-    expect(document.querySelector("[data-slot='date-picker-trigger']")).toBeTruthy()
+    expect(
+      document.querySelector("[data-slot='date-picker-trigger']"),
+    ).toBeTruthy()
     expect(document.body.textContent).toContain('Pick a date')
   })
 
@@ -87,14 +91,15 @@ describe('component date-picker', () => {
             setValue(nextValue)
             onValueChange(nextValue)
           }}
-          calendarProps={{ defaultMonth: new Date(2024, 0, 1), showOutsideDays: false }}
+          calendarProps={{
+            defaultMonth: new Date(2024, 0, 1),
+            showOutsideDays: false,
+          }}
         />
       )
     }
 
-    await mount(
-      <ControlledPicker />,
-    )
+    await mount(<ControlledPicker />)
 
     await click(document.querySelector("[data-slot='date-picker-trigger']"))
     await click(document.querySelector("[data-testid='calendar-select-date']"))
@@ -110,7 +115,7 @@ describe('component date-picker', () => {
         value={undefined}
         onValueChange={() => {}}
         trigger={
-          <button type='button' data-testid='custom-date-trigger'>
+          <button type="button" data-testid="custom-date-trigger">
             Open Custom Trigger
           </button>
         }

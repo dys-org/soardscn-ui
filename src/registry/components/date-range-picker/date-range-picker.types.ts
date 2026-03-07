@@ -1,8 +1,8 @@
 import type { ComponentProps, ReactElement } from 'react'
 import type { DateRange } from 'react-day-picker'
 
-import { Calendar } from '@/registry/ui/calendar'
-import { PopoverContent } from '@/registry/ui/popover'
+import type { Calendar } from '@/registry/ui/calendar'
+import type { PopoverContent } from '@/registry/ui/popover'
 
 export type DateRangePickerProps = {
   value: DateRange | undefined

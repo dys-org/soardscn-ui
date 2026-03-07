@@ -98,7 +98,12 @@
     {
       "name": "input-group",
       "type": "registry:ui",
-      "registryDependencies": ["utils", "@ui/button", "@ui/input", "@ui/textarea"],
+      "registryDependencies": [
+        "utils",
+        "@ui/button",
+        "@ui/input",
+        "@ui/textarea"
+      ],
       "dependencies": ["class-variance-authority"],
       "files": [
         {
@@ -250,7 +255,12 @@
     {
       "name": "date-picker",
       "type": "registry:component",
-      "registryDependencies": ["utils", "@ui/button", "@ui/calendar", "@ui/popover"],
+      "registryDependencies": [
+        "utils",
+        "@ui/button",
+        "@ui/calendar",
+        "@ui/popover"
+      ],
       "dependencies": ["date-fns"],
       "files": [
         {
@@ -270,7 +280,12 @@
     {
       "name": "date-range-picker",
       "type": "registry:component",
-      "registryDependencies": ["utils", "@ui/button", "@ui/calendar", "@ui/popover"],
+      "registryDependencies": [
+        "utils",
+        "@ui/button",
+        "@ui/calendar",
+        "@ui/popover"
+      ],
       "dependencies": ["date-fns"],
       "files": [
         {

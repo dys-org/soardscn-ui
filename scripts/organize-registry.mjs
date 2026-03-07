@@ -24,7 +24,9 @@ async function fileExists(target) {
 
 async function main() {
   if (!(await fileExists(outputRoot))) {
-    throw new Error(`Missing output directory: ${outputRoot}. Run shadcn build first.`)
+    throw new Error(
+      `Missing output directory: ${outputRoot}. Run shadcn build first.`,
+    )
   }
 
   const uiDir = path.join(outputRoot, 'ui')

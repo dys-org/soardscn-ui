@@ -21,7 +21,9 @@ function getRouteFromHash(hash: string): RoutePath {
 }
 
 export function App() {
-  const [route, setRoute] = useState(() => getRouteFromHash(window.location.hash))
+  const [route, setRoute] = useState(() =>
+    getRouteFromHash(window.location.hash),
+  )
 
   useEffect(() => {
     const onHashChange = () => {

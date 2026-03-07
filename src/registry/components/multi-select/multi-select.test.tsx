@@ -1,15 +1,17 @@
-import { afterEach, describe, expect, it } from "vitest"
-import { act, type ReactNode } from "react"
-import { createRoot, type Root } from "react-dom/client"
+import { afterEach, describe, expect, it } from 'vitest'
+import { act } from 'react'
+import { createRoot } from 'react-dom/client'
+import type { ReactNode } from 'react'
+import type { Root } from 'react-dom/client'
 
-import { MultiSelect } from "@/registry/components/multi-select"
+import { MultiSelect } from '@/registry/components/multi-select'
 
-describe("component multi-select render smoke test", () => {
+describe('component multi-select render smoke test', () => {
   let root: Root | null = null
   let container: HTMLDivElement | null = null
 
   async function mount(ui: ReactNode) {
-    container = document.createElement("div")
+    container = document.createElement('div')
     document.body.appendChild(container)
     root = createRoot(container)
     await act(async () => {
@@ -26,23 +28,25 @@ describe("component multi-select render smoke test", () => {
     container = null
   })
 
-  it("renders grouped options with searchable trigger", async () => {
+  it('renders grouped options with searchable trigger', async () => {
     await mount(
       <MultiSelect
         options={[
           {
-            label: "Frontend",
+            label: 'Frontend',
             options: [
-              { label: "React", value: "react" },
-              { label: "Vue", value: "vue" },
+              { label: 'React', value: 'react' },
+              { label: 'Vue', value: 'vue' },
             ],
           },
         ]}
-        defaultValue={["react"]}
+        defaultValue={['react']}
       />,
     )
 
     expect(document.querySelector("[data-slot='multi-select']")).toBeTruthy()
-    expect(document.querySelector("[data-slot='multi-select-status']")).toBeTruthy()
+    expect(
+      document.querySelector("[data-slot='multi-select-status']"),
+    ).toBeTruthy()
   })
 })

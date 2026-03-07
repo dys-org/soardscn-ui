@@ -1,4 +1,4 @@
-export { MultiSelect } from "./multi-select"
+export { MultiSelect } from './multi-select'
 export type {
   MultiSelectDevice,
   MultiSelectDeviceConfig,
@@ -7,4 +7,4 @@ export type {
   MultiSelectOptions,
   MultiSelectResponsiveConfig,
   MultiSelectVariant,
-} from "./multi-select.types"
+} from './multi-select.types'
