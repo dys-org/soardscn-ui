@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { RiCloseLine } from '@remixicon/react'
 import { cva } from 'class-variance-authority'
 
 import type {
@@ -27,7 +28,7 @@ import {
 } from '@/registry/ui/combobox'
 
 const multiSelectTriggerVariants = cva(
-  'border-input bg-input/20 dark:bg-input/30 focus-within:border-ring focus-within:ring-ring/30 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive dark:has-aria-invalid:border-destructive/50 flex min-h-7 w-full items-center gap-1 rounded-md border px-2 py-0.5 text-xs/relaxed transition-colors focus-within:ring-2 has-aria-invalid:ring-2',
+  'border-input bg-transparent dark:bg-input/30 focus-within:border-ring focus-within:ring-ring/50 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive dark:has-aria-invalid:border-destructive/50 flex min-h-8 w-full items-center gap-1 rounded-lg border bg-clip-padding px-2.5 py-1 text-sm transition-colors focus-within:ring-3 has-aria-invalid:ring-3',
   {
     variants: {
       variant: {
@@ -294,7 +295,7 @@ function MultiSelect({
           {visibleSelected.map((selectedOption) => (
             <Badge
               key={selectedOption.value}
-              variant="secondary"
+              variant="outline"
               className={cn(
                 'max-w-full gap-1 truncate',
                 badgeToneClasses[variant],
@@ -304,14 +305,14 @@ function MultiSelect({
               <span className="truncate">{selectedOption.label}</span>
               <button
                 type="button"
-                className="opacity-60 transition-opacity hover:opacity-100"
+                className="-mr-1 flex items-center opacity-60 transition-opacity hover:opacity-100"
                 onClick={(event) => {
                   event.stopPropagation()
                   removeValue(selectedOption.value)
                 }}
                 aria-label={`Remove ${selectedOption.label}`}
               >
-                x
+                <RiCloseLine className="size-3" />
               </button>
             </Badge>
           ))}
