@@ -1,10 +1,9 @@
-import { act, useState } from 'react'
-import { createRoot } from 'react-dom/client'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { useState } from 'react'
+import { render } from 'vitest-browser-react'
+import { userEvent } from '@vitest/browser/context'
+import { describe, expect, it, vi } from 'vitest'
 
 import { format } from 'date-fns'
-import type { Root } from 'react-dom/client'
-import type { ReactNode } from 'react'
 import type { DateRange } from 'react-day-picker'
 
 import { DateRangePicker } from '@/registry/components/date-range-picker'
@@ -37,62 +36,29 @@ vi.mock('@/registry/ui/calendar', () => ({
 }))
 
 describe('component date-range-picker', () => {
-  let root: Root | null = null
-  let container: HTMLDivElement | null = null
-
-  async function mount(ui: ReactNode) {
-    container = document.createElement('div')
-    document.body.appendChild(container)
-    root = createRoot(container)
-    await act(async () => {
-      root?.render(ui)
-    })
-  }
-
-  async function click(target: Element | null) {
-    if (!target) {
-      throw new Error('Missing click target')
-    }
-
-    await act(async () => {
-      target.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
-      target.dispatchEvent(new PointerEvent('pointerup', { bubbles: true }))
-      target.dispatchEvent(new MouseEvent('click', { bubbles: true }))
-    })
-  }
-
-  afterEach(async () => {
-    await act(async () => {
-      root?.unmount()
-    })
-    container?.remove()
-    root = null
-    container = null
-  })
-
   it('renders root and default trigger', async () => {
-    await mount(<DateRangePicker value={undefined} onValueChange={() => {}} />)
+    const screen = render(
+      <DateRangePicker value={undefined} onValueChange={() => {}} />,
+    )
 
-    expect(
-      document.querySelector("[data-slot='date-range-picker']"),
-    ).toBeTruthy()
-    expect(
-      document.querySelector("[data-slot='date-range-picker-trigger']"),
-    ).toBeTruthy()
-    expect(document.body.textContent).toContain('Pick a date range')
+    await expect.element(screen.getByText('Pick a date range')).toBeVisible()
   })
 
   it('renders formatted selected range value', async () => {
     const from = new Date(2024, 0, 10)
     const to = new Date(2024, 0, 20)
 
-    await mount(
+    const screen = render(
       <DateRangePicker value={{ from, to }} onValueChange={() => {}} />,
     )
 
-    expect(document.body.textContent).toContain(
-      `${format(from, 'LLL dd, y')} - ${format(to, 'LLL dd, y')}`,
-    )
+    await expect
+      .element(
+        screen.getByText(
+          `${format(from, 'LLL dd, y')} - ${format(to, 'LLL dd, y')}`,
+        ),
+      )
+      .toBeVisible()
   })
 
   it('calls onValueChange with a complete range after two selections', async () => {
@@ -117,13 +83,11 @@ describe('component date-range-picker', () => {
       )
     }
 
-    await mount(<ControlledRangePicker />)
+    const screen = render(<ControlledRangePicker />)
 
-    await click(
-      document.querySelector("[data-slot='date-range-picker-trigger']"),
-    )
-    await click(document.querySelector("[data-testid='calendar-select-start']"))
-    await click(document.querySelector("[data-testid='calendar-select-end']"))
+    await userEvent.click(screen.getByText('Pick a date range'))
+    await userEvent.click(screen.getByTestId('calendar-select-start'))
+    await userEvent.click(screen.getByTestId('calendar-select-end'))
 
     const hasCompleteRange = onValueChange.mock.calls.some(([arg]) => {
       return arg?.from instanceof Date && arg?.to instanceof Date
@@ -133,7 +97,7 @@ describe('component date-range-picker', () => {
   })
 
   it('supports custom trigger and opens calendar', async () => {
-    await mount(
+    const screen = render(
       <DateRangePicker
         value={undefined}
         onValueChange={() => {}}
@@ -145,10 +109,10 @@ describe('component date-range-picker', () => {
       />,
     )
 
-    await click(
-      document.querySelector("[data-testid='custom-date-range-trigger']"),
-    )
+    await userEvent.click(screen.getByTestId('custom-date-range-trigger'))
 
-    expect(document.querySelector("[data-slot='calendar']")).toBeTruthy()
+    await expect
+      .element(screen.getByTestId('calendar-select-start'))
+      .toBeVisible()
   })
 })

@@ -1,8 +1,5 @@
-import { afterEach, describe, expect, it } from 'vitest'
-import { createRoot } from 'react-dom/client'
-import { act } from 'react'
-import type { Root } from 'react-dom/client'
-import type { ReactNode } from 'react'
+import { render } from 'vitest-browser-react'
+import { describe, expect, it } from 'vitest'
 
 import { AlertDialog, AlertDialogTrigger } from '@/registry/ui/alert-dialog'
 import { Badge } from '@/registry/ui/badge'
@@ -19,83 +16,65 @@ import { Separator } from '@/registry/ui/separator'
 import { Textarea } from '@/registry/ui/textarea'
 
 describe('registry ui render smoke tests', () => {
-  let root: Root | null = null
-  let container: HTMLDivElement | null = null
-
-  async function mount(ui: ReactNode) {
-    container = document.createElement('div')
-    document.body.appendChild(container)
-    root = createRoot(container)
-    await act(async () => {
-      root?.render(ui)
-    })
-  }
-
-  afterEach(async () => {
-    await act(async () => {
-      root?.unmount()
-    })
-    container?.remove()
-    root = null
-    container = null
-  })
-
   it('renders alert-dialog', async () => {
-    await mount(
+    const screen = render(
       <AlertDialog>
         <AlertDialogTrigger>Open dialog</AlertDialogTrigger>
       </AlertDialog>,
     )
 
-    expect(
-      document.querySelector('[data-slot="alert-dialog-trigger"]'),
-    ).toBeTruthy()
+    await expect
+      .element(screen.getByRole('button', { name: 'Open dialog' }))
+      .toBeVisible()
   })
 
   it('renders badge', async () => {
-    await mount(<Badge>Status</Badge>)
-    expect(document.body.textContent).toContain('Status')
+    const screen = render(<Badge>Status</Badge>)
+    await expect.element(screen.getByText('Status')).toBeVisible()
   })
 
   it('renders button', async () => {
-    await mount(<Button>Save</Button>)
-    expect(document.querySelector('[data-slot="button"]')).toBeTruthy()
+    const screen = render(<Button>Save</Button>)
+    await expect
+      .element(screen.getByRole('button', { name: 'Save' }))
+      .toBeVisible()
   })
 
   it('renders card', async () => {
-    await mount(
+    const screen = render(
       <Card>
         <CardTitle>Title</CardTitle>
         <CardContent>Content</CardContent>
       </Card>,
     )
-    expect(document.querySelector('[data-slot="card"]')).toBeTruthy()
+    await expect.element(screen.getByText('Title')).toBeVisible()
+    await expect.element(screen.getByText('Content')).toBeVisible()
   })
 
   it('renders combobox', async () => {
-    await mount(
+    const screen = render(
       <Combobox items={['React', 'Vue']}>
         <ComboboxInput placeholder="Framework" />
       </Combobox>,
     )
 
-    expect(document.querySelector('[data-slot="input-group"]')).toBeTruthy()
+    await expect.element(screen.getByPlaceholder('Framework')).toBeVisible()
   })
 
   it('renders dropdown-menu', async () => {
-    await mount(
+    const screen = render(
       <DropdownMenu>
         <DropdownMenuTrigger>Open menu</DropdownMenuTrigger>
       </DropdownMenu>,
     )
 
-    expect(
-      document.querySelector('[data-slot="dropdown-menu-trigger"]'),
-    ).toBeTruthy()
+    await expect
+      .element(screen.getByRole('button', { name: 'Open menu' }))
+      .toBeVisible()
   })
 
   it('renders field', async () => {
-    await mount(
+    const screen = render(
       <FieldGroup>
         <Field>
           <FieldLabel htmlFor="name">Name</FieldLabel>
@@ -104,35 +83,35 @@ describe('registry ui render smoke tests', () => {
       </FieldGroup>,
     )
 
-    expect(document.querySelector('[data-slot="field-label"]')).toBeTruthy()
+    await expect.element(screen.getByText('Name')).toBeVisible()
   })
 
   it('renders input-group', async () => {
-    await mount(
+    const screen = render(
       <InputGroup>
         <InputGroupInput aria-label="Group input" />
       </InputGroup>,
     )
 
-    expect(
-      document.querySelector('input[aria-label="Group input"]'),
-    ).toBeTruthy()
+    await expect
+      .element(screen.getByRole('textbox', { name: 'Group input' }))
+      .toBeVisible()
   })
 
   it('renders input', async () => {
-    await mount(<Input aria-label="Plain input" />)
-    expect(
-      document.querySelector('input[aria-label="Plain input"]'),
-    ).toBeTruthy()
+    const screen = render(<Input aria-label="Plain input" />)
+    await expect
+      .element(screen.getByRole('textbox', { name: 'Plain input' }))
+      .toBeVisible()
   })
 
   it('renders label', async () => {
-    await mount(<Label htmlFor="email">Email</Label>)
-    expect(document.querySelector('[data-slot="label"]')).toBeTruthy()
+    const screen = render(<Label htmlFor="email">Email</Label>)
+    await expect.element(screen.getByText('Email')).toBeVisible()
   })
 
   it('renders select', async () => {
-    await mount(
+    const screen = render(
       <Select>
         <SelectTrigger>
           <SelectValue placeholder="Choose one" />
@@ -140,18 +119,18 @@ describe('registry ui render smoke tests', () => {
       </Select>,
     )
 
-    expect(document.querySelector('[data-slot="select-trigger"]')).toBeTruthy()
+    await expect.element(screen.getByText('Choose one')).toBeVisible()
   })
 
   it('renders separator', async () => {
-    await mount(<Separator />)
-    expect(document.querySelector('[data-slot="separator"]')).toBeTruthy()
+    const screen = render(<Separator />)
+    await expect.element(screen.getByRole('separator')).toBeVisible()
   })
 
   it('renders textarea', async () => {
-    await mount(<Textarea aria-label="Description" />)
-    expect(
-      document.querySelector('textarea[aria-label="Description"]'),
-    ).toBeTruthy()
+    const screen = render(<Textarea aria-label="Description" />)
+    await expect
+      .element(screen.getByRole('textbox', { name: 'Description' }))
+      .toBeVisible()
   })
 })

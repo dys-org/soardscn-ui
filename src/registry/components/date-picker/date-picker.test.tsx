@@ -1,10 +1,9 @@
-import { act, useState } from 'react'
-import { createRoot } from 'react-dom/client'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { useState } from 'react'
+import { render } from 'vitest-browser-react'
+import { userEvent } from '@vitest/browser/context'
+import { describe, expect, it, vi } from 'vitest'
 
 import { format } from 'date-fns'
-import type { Root } from 'react-dom/client'
-import type { ReactNode } from 'react'
 
 import { DatePicker } from '@/registry/components/date-picker'
 
@@ -27,55 +26,20 @@ vi.mock('@/registry/ui/calendar', () => ({
 }))
 
 describe('component date-picker', () => {
-  let root: Root | null = null
-  let container: HTMLDivElement | null = null
-
-  async function mount(ui: ReactNode) {
-    container = document.createElement('div')
-    document.body.appendChild(container)
-    root = createRoot(container)
-    await act(async () => {
-      root?.render(ui)
-    })
-  }
-
-  async function click(target: Element | null) {
-    if (!target) {
-      throw new Error('Missing click target')
-    }
-
-    await act(async () => {
-      target.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
-      target.dispatchEvent(new PointerEvent('pointerup', { bubbles: true }))
-      target.dispatchEvent(new MouseEvent('click', { bubbles: true }))
-    })
-  }
-
-  afterEach(async () => {
-    await act(async () => {
-      root?.unmount()
-    })
-    container?.remove()
-    root = null
-    container = null
-  })
-
   it('renders root and default trigger', async () => {
-    await mount(<DatePicker value={undefined} onValueChange={() => {}} />)
+    const screen = render(
+      <DatePicker value={undefined} onValueChange={() => {}} />,
+    )
 
-    expect(document.querySelector("[data-slot='date-picker']")).toBeTruthy()
-    expect(
-      document.querySelector("[data-slot='date-picker-trigger']"),
-    ).toBeTruthy()
-    expect(document.body.textContent).toContain('Pick a date')
+    await expect.element(screen.getByText('Pick a date')).toBeVisible()
   })
 
   it('renders formatted selected value', async () => {
     const value = new Date(2024, 0, 15)
 
-    await mount(<DatePicker value={value} onValueChange={() => {}} />)
+    const screen = render(<DatePicker value={value} onValueChange={() => {}} />)
 
-    expect(document.body.textContent).toContain(format(value, 'PPP'))
+    await expect.element(screen.getByText(format(value, 'PPP'))).toBeVisible()
   })
 
   it('calls onValueChange with a Date after selecting a day', async () => {
@@ -99,10 +63,10 @@ describe('component date-picker', () => {
       )
     }
 
-    await mount(<ControlledPicker />)
+    const screen = render(<ControlledPicker />)
 
-    await click(document.querySelector("[data-slot='date-picker-trigger']"))
-    await click(document.querySelector("[data-testid='calendar-select-date']"))
+    await userEvent.click(screen.getByText('Pick a date'))
+    await userEvent.click(screen.getByTestId('calendar-select-date'))
 
     expect(onValueChange).toHaveBeenCalled()
     const lastCall = onValueChange.mock.calls.at(-1)?.[0]
@@ -110,7 +74,7 @@ describe('component date-picker', () => {
   })
 
   it('supports custom trigger and opens calendar', async () => {
-    await mount(
+    const screen = render(
       <DatePicker
         value={undefined}
         onValueChange={() => {}}
@@ -122,8 +86,10 @@ describe('component date-picker', () => {
       />,
     )
 
-    await click(document.querySelector("[data-testid='custom-date-trigger']"))
+    await userEvent.click(screen.getByTestId('custom-date-trigger'))
 
-    expect(document.querySelector("[data-slot='calendar']")).toBeTruthy()
+    await expect
+      .element(screen.getByTestId('calendar-select-date'))
+      .toBeVisible()
   })
 })
